@@ -13,5 +13,5 @@ provider "aws" {
 }
 
 resource "aws_ecr_repository" "Autentication_repo" {
-  name = "beauty-saas-autentication"
+  name = "erp-contable-autentication"
 }

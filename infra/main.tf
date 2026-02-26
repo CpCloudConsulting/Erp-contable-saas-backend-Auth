@@ -26,10 +26,6 @@ module "lambda" {
   region = var.region
 }
 
-module "rds" {
-  source = "./modules/rds"
-}
-
 module "cognito" {
   source = "./modules/cognito"
 }

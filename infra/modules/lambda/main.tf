@@ -6,7 +6,7 @@ data "archive_file" "lambda_zip" {
 }
 
 resource "aws_lambda_function" "authentication" {
-  function_name = "beauty-saas-authentication"
+  function_name = "erp-contable-saas-authentication"
   handler       = "main.handler"
   runtime       = "nodejs20.x"
   
@@ -23,7 +23,7 @@ resource "aws_lambda_function" "authentication" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "beauty_lambda_exec"
+  name = "erp-contable-saas_lambda_exec"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -38,7 +38,7 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 resource "aws_apigatewayv2_api" "http_api" {
-  name          = "beauty-api-autentication"
+  name          = "erp-contable-api-autentication"
   protocol_type = "HTTP"
 }
 

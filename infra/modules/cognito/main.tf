@@ -1,5 +1,5 @@
-resource "aws_cognito_user_pool" "beauty_saas" {
-  name = "beauty-saas-user-pool"
+resource "aws_cognito_user_pool" "erp-contable_saas" {
+  name = "erp-contable-user-pool"
 
   # 🔑 Login con email
   username_attributes = ["email"]
@@ -34,9 +34,9 @@ resource "aws_cognito_user_pool" "beauty_saas" {
   }
 }
 
-resource "aws_cognito_user_pool_client" "beauty_saas_client" {
-  name         = "beauty-saas-client"
-  user_pool_id = aws_cognito_user_pool.beauty_saas.id
+resource "aws_cognito_user_pool_client" "erp-contable_client" {
+  name         = "erp-contable-client"
+  user_pool_id = aws_cognito_user_pool.erp-contable_saas.id
 
   generate_secret = false
 

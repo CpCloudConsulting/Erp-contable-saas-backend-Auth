@@ -1,5 +1,5 @@
 {
-  "name": "authentication-lambda",
+  "name": "erp-contable-authentication-lambda",
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {

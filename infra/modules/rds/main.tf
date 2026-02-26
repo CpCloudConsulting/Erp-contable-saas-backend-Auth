@@ -1,6 +1,6 @@
 
 resource "aws_db_instance" "postgres" {
-  identifier         = "beauty-saas-db"
+  identifier         = "erp-contable-db"
   engine             = "postgres"
   instance_class     = "db.t4g.micro"
   allocated_storage  = 20
