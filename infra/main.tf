@@ -19,13 +19,21 @@ provider "aws" {
 }
 
 
-module "lambda" {
+module "lambda_auth" {
   source = "./modules/lambda"
 
-  cognito_client_id = var.cognito_client_id
+  COGNITO_CLIENT_ID = var.COGNITO_CLIENT_ID
+  COGNITO_USER_POOL_ID = var.COGNITO_USER_POOL_ID
+
   region = var.region
 }
 
 module "cognito" {
   source = "./modules/cognito"
+}
+
+module "api_auth" {
+  source = "./modules/apigateway"
+
+  lambda_arn = module.lambda_auth.lambda_arn
 }

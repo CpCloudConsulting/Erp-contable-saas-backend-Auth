@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/handler.ts --bundle --platform=node --target=node20 --outfile=dist/handler.js",
     "clean": "rimraf dist",
     "prepare": "npm run clean && npm run build"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/aws-lambda": "^8.10.161",
+    "@types/node": "^20.19.39",
+    "esbuild": "^0.28.0",
     "rimraf": "^5.0.0",
     "typescript": "^5.0.0"
   },
