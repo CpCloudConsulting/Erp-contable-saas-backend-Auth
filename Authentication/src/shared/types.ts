@@ -12,4 +12,5 @@ export interface CustomAPIGatewayEvent
     authorizer: AuthorizerContext;
   };
   httpMethod?: string;
+  action?: string;
 }

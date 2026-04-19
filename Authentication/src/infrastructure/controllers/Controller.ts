@@ -17,6 +17,11 @@ export class Controller {
 
 
   async handle(event: CustomAPIGatewayEvent) {
+    
+    if (event.action === "createUser") {
+      return await this.createUser(event);
+    }
+
     let routeKey = event.routeKey;
     routeKey = routeKey.replace(this.Domain, "");
     
@@ -34,7 +39,7 @@ export class Controller {
   }
 
   private async createUser(event: CustomAPIGatewayEvent) {
-    const body = JSON.parse(event.body || "{}");
+    const body = event.body? JSON.parse(event.body) : event;
     const container = new Container();
     const user = await container.createUser.execute(body);
     return this.ok(user);

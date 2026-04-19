@@ -6,7 +6,6 @@ export class CreateUser {
   constructor(private repo: UserRepository) {}
 
   async execute(data: User): Promise<Cognito> {
-    console.log("Creating user with data:", data);
     return this.repo.CreateUser(data);
   }
 }
