@@ -1,5 +1,5 @@
 
-# Erp Contable SaaS - AWS Ready
+# BeautySuite SaaS - AWS Ready
 
 ## Features
 - Dockerized backend

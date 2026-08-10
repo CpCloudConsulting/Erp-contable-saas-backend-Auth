@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs22.x
+      Handler: dist/handler.handler
+      CodeUri: AuthFunction
+      Timeout: 30
+      Events:
+        Login:
+          Type: Api
+          Properties:
+            Path: /auth/login
+            Method: post
+        User:
+          Type: Api
+          Properties:
+            Path: /auth/user
+            Method: post
+      Environment:
+        Variables:
+          DB_HOST: host.docker.internal
+          DB_PORT: 5432
+          DB_NAME: BeautySuite
+          DB_USER: BeautySuite
+          DB_PASSWORD: BeautySuite123
+          DB_SSL: false
+          JWT_SECRET: TuClaveSecretaDeAlMenos32Caracteres
+          JWT_EXPIRES_IN: 15m
+          JWT_REFRESH_EXPIRES_IN: 7d
+    Metadata:
+      SamResourceId: AuthFunction

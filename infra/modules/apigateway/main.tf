@@ -1,6 +1,6 @@
 
 resource "aws_apigatewayv2_api" "http_api" {
-  name          = "erp-contable-api-autentication"
+  name          = "BeautySuite-api-autentication"
   protocol_type = "HTTP"
 }
 
