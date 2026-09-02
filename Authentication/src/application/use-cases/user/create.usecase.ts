@@ -1,6 +1,6 @@
-import { CreateUserEntity, UsersResponse } from "../../domain/models/login.models";
-import { PasswordPort } from "../../domain/ports/password.port";
-import { UserRepositoryPort } from "../../domain/ports/user-repository.port";
+import { CreateUserEntity, UsersResponse } from "../../../domain/models/login.models";
+import { PasswordPort } from "../../../domain/ports/password.port";
+import { UserRepositoryPort } from "../../../domain/ports/user-repository.port";
 
 export class CreateUserUseCase {
 

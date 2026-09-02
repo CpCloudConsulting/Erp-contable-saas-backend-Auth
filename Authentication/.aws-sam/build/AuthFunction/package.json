@@ -4,8 +4,10 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "esbuild src/handler.ts --bundle --platform=node --target=node20 --outfile=dist/handler.js",
+    "build:server": "esbuild src/server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js",
     "clean": "rimraf dist",
-    "prepare": "npm run clean && npm run build"
+    "prepare": "npm run clean && npm run build",
+    "start": "node dist/server.js"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.161",
@@ -24,6 +26,7 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.998.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.22.0",

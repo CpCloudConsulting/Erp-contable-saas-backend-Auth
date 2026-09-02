@@ -16,11 +16,11 @@ export class PostgresUserRepository implements UserRepositoryPort {
   }
 
   async create(user: CreateUserEntity, hash: string): Promise<UsersResponse> {
-    const query = 'INSERT INTO users ( username, email, password, name, phone) VALUES ($1, $2, $3, $4, $5) RETURNING id, username, email, name, phone, active';
+    const query = 'INSERT INTO users ( username, email, password_hash, name, phone) VALUES ($1, $2, $3, $4, $5) RETURNING id_user, username, email, name, phone, active';
     const result = await this.client.query(query, [user.username, user.email, hash, user.name, user.phone]);
     const row = result.rows[0];
     return {
-      id: row.id,
+      id: row.id_user,
       email: row.email,
       username: row.username,
       active: row.active,

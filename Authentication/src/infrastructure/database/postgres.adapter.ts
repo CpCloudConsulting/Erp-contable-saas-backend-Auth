@@ -2,22 +2,9 @@ import "../../config/env";
 import { Pool, PoolClient, QueryResult } from "pg";
 
 export class PostgresAdapter {
-
     private readonly pool: Pool;
 
-    
-
     constructor() {
-        console.log("POSTGRES CONFIG:", {
-            host: process.env.DB_HOST,
-            port: process.env.DB_PORT,
-            database: process.env.DB_NAME,
-            user: process.env.DB_USER,
-            passwordType: typeof process.env.DB_PASSWORD,
-            passwordExists: !!process.env.DB_PASSWORD,
-            ssl: process.env.DB_SSL
-        });
-
         this.pool = new Pool({
             host: process.env.DB_HOST,
             port: Number(process.env.DB_PORT ?? 5432),

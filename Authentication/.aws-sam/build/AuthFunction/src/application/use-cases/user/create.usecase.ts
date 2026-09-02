@@ -1,6 +1,6 @@
-import { CreateUserEntity, UsersResponse } from "../../domain/models/login.models";
-import { PasswordPort } from "../../domain/ports/password.port";
-import { UserRepositoryPort } from "../../domain/ports/user-repository.port";
+import { CreateUserEntity, UsersResponse } from "../../../domain/models/login.models";
+import { PasswordPort } from "../../../domain/ports/password.port";
+import { UserRepositoryPort } from "../../../domain/ports/user-repository.port";
 
 export class CreateUserUseCase {
 
@@ -11,10 +11,10 @@ export class CreateUserUseCase {
 
     async execute(data: CreateUserEntity): Promise<UsersResponse> {
         const user = await this.userPort.findByUsername(data.username);
-        if (!user) throw new Error("Nombre de usuario ya existe");
+        if (user) throw new Error("Nombre de usuario ya existe");
 
         const email = await this.userPort.findByEmail(data.email);
-        if (!email) throw new Error("Email ya registrado");
+        if (email) throw new Error("Email ya registrado");
 
         const pass_hash = await this.passwordPort.hash(data.password);
 

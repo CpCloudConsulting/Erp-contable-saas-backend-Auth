@@ -1,7 +1,7 @@
+import "../../config/env";
 import { Pool, PoolClient, QueryResult } from "pg";
 
 export class PostgresAdapter {
-
     private readonly pool: Pool;
 
     constructor() {

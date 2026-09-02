@@ -10,14 +10,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
-  console.log("REQUEST:", req.method, req.originalUrl);
-  console.log("URL:", req.url);
   //req.url = req.url.replace(/^\/[^\/]+/, "");
   next();
 });
 
 app.use(TenantMiddleware);
 app.use(ReleaseDbConnection);
-app.use("/auth", AuthRoutes);
+app.use("", AuthRoutes);
 
 export default app;

@@ -30,7 +30,7 @@ export class JwtTokenService implements TokenPort {
     generateRefreshToken(payload: RefreshTokenPayload): string {
         const options: SignOptions = {
             algorithm: "HS256",
-            expiresIn: process.env.JWT_REFRESH_EXPIRES_IN as StringValue,
+            expiresIn: process.env.JWT_EXPIRES_IN_REFRESH as StringValue,
         };
         return jwt.sign(payload, this.secretKey, options);
     }
