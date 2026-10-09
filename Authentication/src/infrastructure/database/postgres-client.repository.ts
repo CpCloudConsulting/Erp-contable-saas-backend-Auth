@@ -20,6 +20,28 @@ export class PostgresClientRepository implements ClientRepositoryPort {
     return result.rowCount === 1;
   }
 
+  async list(): Promise<ClientResponse[]> {
+    const query = 'SELECT * FROM clients';
+    const result = await this.client.query(query);
+    console.log("resultado :", result);
+    return result.rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      lastName: row.last_name,
+      secondLastName: '',
+      birthDate: row.birt_date,
+      gender: row.gender,
+      maritalStatus: row.marital_status,
+      mobilePhone: row.mobile,
+      phone: row.phone,
+      email: row.email,
+      address: row.address,
+      notes: row.notes,
+      clientSince: row.client_since,
+      active: row.active,
+    }));
+  }
+
   async findByDocumentId(docId: string): Promise<boolean> {
     const query = 'SELECT COUNT(*) FROM clients WHERE document_number = $1';
     const result = await this.client.query(query, [docId]);

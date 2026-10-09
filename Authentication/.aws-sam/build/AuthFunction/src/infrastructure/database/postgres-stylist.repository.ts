@@ -8,13 +8,13 @@ export class PostgresStylistRepository implements StylistRepositoryPort {
   constructor(
     private readonly client: PoolClient
   ) { }
-  
+
   findByDocumentId(DocumentId: string): Promise<StylistResponse> {
     throw new Error("Method not implemented.");
   }
 
   async findByEmail(email: string): Promise<boolean> {
-    const query = 'SELECT COUNT(*) FROM stylist WHERE email = $1';
+    const query = 'SELECT COUNT(*) FROM stylists WHERE email = $1';
     const result = await this.client.query(query, [email]);
     return result.rows[0].count > 0;
   }
@@ -28,7 +28,15 @@ export class PostgresStylistRepository implements StylistRepositoryPort {
   async list(): Promise<StylistResponse[]> {
     const query = 'SELECT * FROM stylists';
     const result = await this.client.query(query);
-    return result.rows;
+    return result.rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      phone: row.phone,
+      email: row.email,
+      specialty: row.specialty,
+      commission: Number(row.commission_percentage),
+      active: row.active,
+    }));
   }
 
 }

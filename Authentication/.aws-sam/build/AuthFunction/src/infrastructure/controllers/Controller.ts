@@ -42,6 +42,38 @@ export class AuthController {
     const stylist = await services.StylistById.execute();
     return res.json(stylist);
   }
+
+  async CreateServices(req: Request, res: Response) {
+    const body = req.body;
+    const services = new Container(req.dbClient!);
+    const service = await services.createService.execute(body);
+    return res.json(service);
+  }
+
+  async CreateProducts(req: Request, res: Response) {
+    const body = req.body;
+    const services = new Container(req.dbClient!);
+    const product = await services.createProduct.execute(body);
+    return res.json(product);
+  }
+
+  async ListProducts(req: Request, res: Response) {
+    const services = new Container(req.dbClient!);
+    const products = await services.listProduct.execute();
+    return res.json(products);
+  }
+
+  async ListServices(req: Request, res: Response) {
+    const services = new Container(req.dbClient!);
+    const service = await services.listService.execute();
+    return res.json(service);
+  }
+
+  async ListClients(req: Request, res: Response) {
+    const services = new Container(req.dbClient!);
+    const clients = await services.listClients.execute();
+    return res.json(clients);
+  }
   
 
 }

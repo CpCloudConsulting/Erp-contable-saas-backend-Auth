@@ -5,12 +5,9 @@ import { StringValue } from "ms";
 
 export class JwtTokenService implements TokenPort {
 
-    private readonly secretKey: string;
+    constructor(private readonly secretKey: string,) {
 
-    constructor() {
-        this.secretKey = process.env.JWT_SECRET ?? '';
-
-        if (!this.secretKey) {
+        if (!secretKey) {
             throw new Error("JWT_SECRET no está configurada");
         }
     }
