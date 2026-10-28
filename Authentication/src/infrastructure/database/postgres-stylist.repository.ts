@@ -20,9 +20,9 @@ export class PostgresStylistRepository implements StylistRepositoryPort {
   }
 
   async create(client: StylistRequest): Promise<boolean> {
-    const query = 'INSERT INTO stylists (name, phone, email, specialty, commission_percentage, active) VALUES ($1, $2, $3, $4, $5, $6) RETURNING active';
-    const result = await this.client.query(query, [client.name, client.phone, client.email, client.specialty, client.commission, client.active]);
-    return result.rowCount === 1;
+    const query = 'SELECT core.create_stylist($1, $2, $3, $4, $5, $6, $7, $8, NULL) AS stylist_id';
+    const result = await this.client.query(query, [client.companyId, client.name, client.phone, client.email, client.specialty, client.commission, client.active, client.sede]);
+    return result.rows[0]?.stylist_id != null;
   }
 
   async list(): Promise<StylistResponse[]> {

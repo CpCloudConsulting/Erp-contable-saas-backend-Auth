@@ -94,4 +94,10 @@ export class AuthController {
     return res.json(tenant);
   }
 
+  async ListLocations(req: Request, res: Response) {
+    const services = await Container.create(req.dbClient!);
+    const locations = await services.listLocations.execute();
+    return res.json(locations);
+  }
+
 }

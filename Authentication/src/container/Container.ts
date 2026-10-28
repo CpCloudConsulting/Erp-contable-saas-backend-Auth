@@ -30,6 +30,8 @@ import { PostgresSaleRepository } from "../infrastructure/database/postgres-sale
 
 import { PostgresCoreRepository } from "../infrastructure/database/postgres-core.repository";
 import { FindTenantUseCase } from "../application/use-cases/tenant/find-tenat.usecase";
+import { PostgresLocationRepository } from "../infrastructure/database/postgres-locations.repository";
+import { ListLocationsUseCase } from "../application/use-cases/locations/list-locations.usecase";
 
 
 export class Container {
@@ -39,6 +41,7 @@ export class Container {
   private readonly stylistRepository: PostgresStylistRepository;
   private readonly productRepository: PostgresProductRepository;
   private readonly serviceRepository: PostgresServiceRepository;
+  private readonly locationRepository: PostgresLocationRepository;
   private readonly saleRepository: PostgresSaleRepository;
 
   private readonly passwordService: BcryptPasswordService;
@@ -58,6 +61,7 @@ export class Container {
   public readonly listClients: ListClientUseCase;
   public readonly createSale: CreateSaleUseCase;
   public readonly getTenant: FindTenantUseCase;
+  public readonly listLocations: ListLocationsUseCase;
 
 
   private constructor(
@@ -72,6 +76,7 @@ export class Container {
     this.productRepository = new PostgresProductRepository(client);
     this.serviceRepository = new PostgresServiceRepository(client);
     this.saleRepository = new PostgresSaleRepository(client);
+    this.locationRepository = new PostgresLocationRepository(client);
 
     // Servicios
     this.passwordService = new BcryptPasswordService();
@@ -134,7 +139,11 @@ export class Container {
     this.getTenant = new FindTenantUseCase(
       this.coreRepository,
     );
-    
+
+    this.listLocations = new ListLocationsUseCase(
+      this.locationRepository,
+    );
+
   }
 
   private static jwtTokenService: JwtTokenService | null = null;

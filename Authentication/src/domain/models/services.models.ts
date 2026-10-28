@@ -1,4 +1,6 @@
 export interface ServicesRequest {
+    companyId: string,
+    sedeId: string,
     name: string,
     description: string,
     durationMinutes: number,

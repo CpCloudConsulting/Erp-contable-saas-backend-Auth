@@ -16,5 +16,6 @@ router.get("/services", controller.ListServices.bind(controller));
 router.post("/products", controller.CreateProducts.bind(controller));
 router.get("/products", controller.ListProducts.bind(controller));
 router.post("/sales", controller.CreateSale.bind(controller));
+router.get("/locations", controller.ListLocations.bind(controller));
 
 export default router;

@@ -24,9 +24,9 @@ export class PostgresServiceRepository implements ServicesRepositoryPort {
 
 
   async create(service: ServicesRequest): Promise<boolean> {
-    const query = 'INSERT INTO services (name, description, duration_minutes, price, commission_percentage, active) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING id';
-    const result = await this.client.query(query, [service.name, service.description, service.durationMinutes, service.price, service.commission, service.active]);
-    return result.rowCount === 1;
+    const query = 'SELECT core.create_services($1, $2, $3, $4, $5, $6, $7, $8, NULL) AS service_id';
+    const result = await this.client.query(query, [service.companyId, service.name, service.description, service.active, service.sedeId, service.price, service.durationMinutes,  service.commission]);
+    return result.rows[0]?.service_id != null;
   }
 
   async findById(id: string): Promise<ServicesResponse | null> {

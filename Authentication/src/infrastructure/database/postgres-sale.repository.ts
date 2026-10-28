@@ -10,10 +10,20 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
 
 
   async create(Sale: SaleRequest): Promise<SaleResponse> {
+    if (!Sale.items?.length) {
+      throw new Error(
+        'La venta debe contener al menos un producto o servicio.',
+      );
+    }
+
     const itemValues = Sale.items
       .map(
         (_, index) =>
-          `ROW($${index * 3 + 7}::varchar, $${index * 3 + 8}::uuid, $${index * 3 + 9}::numeric)::core.sale_item_input`
+          `ROW(
+    $${index * 3 + 6}:: varchar,
+    $${index * 3 + 7}:: uuid,
+    $${index * 3 + 8}:: numeric
+  ):: core.sale_item_input`,
       )
       .join(', ');
 
@@ -25,16 +35,16 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
 
     const query = `
     SELECT core.create_sale(
-      $1::uuid,
-      $2::uuid,
-      $3::uuid,
-      $4::varchar,
-      $5::numeric,
-      ARRAY[
-        ${itemValues}
-      ]::core.sale_item_input[]
-    ) AS sale;
-  `;
+    $1:: uuid,
+    $2:: uuid,
+    $3:: uuid,
+    $4:: varchar,
+    $5:: numeric,
+    ARRAY[
+    ${itemValues}
+      ]:: core.sale_item_input[]
+  ) AS sale;
+`;
 
     const result = await this.client.query(query, [
       Sale.companyId,
@@ -47,5 +57,7 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
 
     return result.rows[0].sale;
   }
+
+
 
 }

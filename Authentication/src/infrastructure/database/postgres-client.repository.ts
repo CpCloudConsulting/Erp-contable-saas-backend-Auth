@@ -23,7 +23,6 @@ export class PostgresClientRepository implements ClientRepositoryPort {
   async list(): Promise<ClientResponse[]> {
     const query = 'SELECT * FROM clients';
     const result = await this.client.query(query);
-    console.log("resultado :", result);
     return result.rows.map((row) => ({
       id: row.id,
       name: row.name,

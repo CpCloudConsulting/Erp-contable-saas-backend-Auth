@@ -1,5 +1,7 @@
 export interface ProductRequest {
+    companyId: string,
     name: string,
+    sedeId: string,
     sku: string,
     barcode: string,
     description: string,

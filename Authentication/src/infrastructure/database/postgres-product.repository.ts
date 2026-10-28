@@ -29,9 +29,9 @@ export class PostgresProductRepository implements ProductRepositoryPort {
   }
 
   async create(product: ProductRequest): Promise<boolean> {
-    const query = 'INSERT INTO products (sku, barcode, name, description, category, brand, purchase_price, sale_price, stock, minimum_stock, unit, active) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id';
-    const result = await this.client.query(query, [product.sku, product.barcode, product.name, product.description, product.category, product.brand, product.purchasePrice, product.salePrice, product.stock, product.minimumStock, product.unit, product.active]);
-    return result.rowCount === 1;
+    const query = 'SELECT core.create_products($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NULL) AS product_id';
+    const result = await this.client.query(query, [product.companyId, product.name, product.description, product.sedeId, product.category, product.sku, product.barcode,  product.brand, product.purchasePrice, product.salePrice, product.stock, product.minimumStock, product.unit, product.active]);
+    return result.rows[0]?.product_id != null;
   }
 
   async findById(docId: string): Promise<ProductResponse | null> {
