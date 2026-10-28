@@ -3,7 +3,7 @@ export interface StylistRequest {
     name: string,
     phone: string,
     email: string,
-    sede: string,
+    sedeId: string,
     specialty: string,
     commission: number,
     active: boolean

@@ -21,7 +21,7 @@ export class PostgresStylistRepository implements StylistRepositoryPort {
 
   async create(client: StylistRequest): Promise<boolean> {
     const query = 'SELECT core.create_stylist($1, $2, $3, $4, $5, $6, $7, $8, NULL) AS stylist_id';
-    const result = await this.client.query(query, [client.companyId, client.name, client.phone, client.email, client.specialty, client.commission, client.active, client.sede]);
+    const result = await this.client.query(query, [client.companyId, client.name, client.phone, client.email, client.specialty, client.commission, client.active, client.sedeId]);
     return result.rows[0]?.stylist_id != null;
   }
 
