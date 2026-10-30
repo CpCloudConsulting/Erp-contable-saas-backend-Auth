@@ -17,6 +17,7 @@ export interface Users {
   companyId: string;
   email: string;
   name: string;
+  sedeId: string;
   roles: string[];
 }
 
@@ -26,6 +27,7 @@ export interface UsersDTO {
   password: string;
   active: string;
   name: string;
+  sedeId: string;
   roles: string[];
 }
 

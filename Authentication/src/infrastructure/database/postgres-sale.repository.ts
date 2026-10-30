@@ -20,9 +20,9 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
       .map(
         (_, index) =>
           `ROW(
-    $${index * 3 + 6}:: varchar,
-    $${index * 3 + 7}:: uuid,
-    $${index * 3 + 8}:: numeric
+    $${index * 3 + 7}:: varchar,
+    $${index * 3 + 8}:: uuid,
+    $${index * 3 + 9}:: numeric
   ):: core.sale_item_input`,
       )
       .join(', ');
@@ -38,8 +38,9 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
     $1:: uuid,
     $2:: uuid,
     $3:: uuid,
-    $4:: varchar,
-    $5:: numeric,
+    $4:: uuid,
+    $5:: varchar,
+    $6:: numeric,
     ARRAY[
     ${itemValues}
       ]:: core.sale_item_input[]
@@ -48,6 +49,7 @@ export class PostgresSaleRepository implements SaleRepositoryPort {
 
     const result = await this.client.query(query, [
       Sale.companyId,
+      Sale.sedeId,
       Sale.customerId,
       Sale.stylistId,
       Sale.paymentMethod,

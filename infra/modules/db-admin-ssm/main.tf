@@ -230,7 +230,7 @@ resource "aws_iam_instance_profile" "db_admin" {
 # =========================================================
 
 resource "aws_instance" "db_admin" {
-  ami = data.aws_ssm_parameter.amazon_linux_2023.value
+  ami = "ami-0d27e0fb3bac4d724"
 
   instance_type = var.instance_type
 

@@ -36,6 +36,7 @@ export class PostgresUserRepository implements UserRepositoryPort {
       u.username,
       u.email,
       u.password_hash,
+      u.sede_id,
       u.active,
       u.name,
       ARRAY_AGG(r.name ORDER BY r.name) AS roles
@@ -50,6 +51,7 @@ export class PostgresUserRepository implements UserRepositoryPort {
       u.username,
       u.email,
       u.password_hash,
+      u.sede_id,
       u.active,
       u.name;
   `;
@@ -68,6 +70,7 @@ export class PostgresUserRepository implements UserRepositoryPort {
       password: row.password_hash,
       active: row.active,
       name: row.name,
+      sedeId: row.sede_id,
       roles: row.roles
     };
   }

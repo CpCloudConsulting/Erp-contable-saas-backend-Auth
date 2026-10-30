@@ -8,6 +8,7 @@ export interface SaleRequest {
     companyId: string;
     customerId: string;
     stylistId: string;
+    sedeId: string;
     paymentMethod: 'cash' | 'transfer' | 'mixed';
     discount: number;
     items: SaleItemRequest[];
